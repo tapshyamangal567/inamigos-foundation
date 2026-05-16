@@ -47,16 +47,112 @@ a {
 }
 
 .hero {
-  height: 100vh;
+  min-height: 100vh;
   background-image: url("images/hero-image.jpeg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-color: #0f1b20;
+  transition: background-position 0.6s ease, background-size 0.6s ease;
   padding: 0;
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8, 14, 18, 0.65), rgba(8, 14, 18, 0.35) 45%, rgba(8, 14, 18, 0.7));
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero > * {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: clamp(24px, 6vw, 80px) 6vw;
+}
+
+.hero-text {
+  max-width: 680px;
+  color: #ffffff;
+  text-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+  display: grid;
+  gap: clamp(14px, 2vw, 20px);
+  animation: heroFade 0.9s ease both;
+}
+
+.hero-tagline {
+  font-size: clamp(0.85rem, 1.6vw, 1rem);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.hero-title {
+  font-family: "Fraunces", serif;
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.hero-description {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 560px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.btn.hero-primary {
+  background: linear-gradient(120deg, #1f6a52, #3f9a78);
+  color: #ffffff;
+  box-shadow: 0 18px 34px rgba(14, 61, 49, 0.4);
+}
+
+.btn.hero-secondary {
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: transparent;
+  color: #ffffff;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+}
+
+.btn.hero-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 42px rgba(14, 61, 49, 0.5);
+}
+
+.btn.hero-secondary:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.9);
+}
+
+@keyframes heroFade {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .site-header {
@@ -1055,6 +1151,15 @@ a {
     height: 100vh;
   }
 
+  .hero-content {
+    align-items: flex-start;
+    padding-top: clamp(100px, 16vw, 160px);
+  }
+
+  .hero-text {
+    max-width: 100%;
+  }
+
   .top-contact-bar {
     flex-direction: column;
     align-items: flex-start;
@@ -1125,6 +1230,10 @@ a {
   .btn {
     width: 100%;
     text-align: center;
+  }
+
+  .hero-actions {
+    width: 100%;
   }
 
   .section-header h2 {
